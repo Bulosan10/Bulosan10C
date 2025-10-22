@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>J B Rental House - Bulosan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: url('{{ url_for("static", filename="house3.jpeg") }}') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      line-height: 1.8;
+      min-height: 100vh;
+      padding-bottom: 120px;
+    }
+    header {
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(6px);
+      padding: 15px 0;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      margin: 0 20px;
+      transition: color 0.3s;
+    }
+    nav a:hover { color: #93c5fd; }
+    .container {
+      max-width: 900px;
+      margin: 60px auto;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(6px);
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    h1, h2 { text-align: center; margin-bottom: 20px; text-shadow: 0 2px 5px rgba(0,0,0,0.7); }
+    p { margin-bottom: 20px; }
+    .houses-list { list-style: none; padding-left: 0; margin-bottom: 30px; }
+    .houses-list li { background: rgba(255,255,255,0.1); padding: 12px 15px; border-radius: 8px; margin-bottom: 10px; font-weight: 600; }
+    .contact-info { text-align: center; margin-top: 30px; }
+    .contact-info a { color: #93c5fd; text-decoration: none; }
+    .contact-info a:hover { text-decoration: underline; }
+    footer { background: rgba(0,0,0,0.6); padding: 15px; text-align: center; color: #cbd5e1; margin-top: 50px; }
+    .logout-btn, .next-page-btn {
+      position: fixed;
+      bottom: 20px;
+      font-weight: 600;
+      border-radius: 8px;
+      padding: 10px 18px;
+      text-decoration: none;
+      cursor: pointer;
+      z-index: 1000;
+      transition: background 0.3s;
+    }
+    .logout-btn { left: 20px; background-color: #ef4444; color: #fff; border: none; }
+    .logout-btn:hover { background-color: #b91c1c; }
+    .next-page-btn { right: 20px; background-color: #2563eb; color: #fff; }
+    .next-page-btn:hover { background-color: #1e40af; }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About Us</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <div class="container" id="home">
+    <h1>Welcome, {{ username }}!</h1>
+
+    <h2>🏠 Available Houses for Rent</h2>
+    <ul class="houses-list">
+      <li>Modern 2-Bedroom House</li>
+      <li>Luxury 4-Bedroom Villa</li>
+      <li>Cebu City Modern Villa</li>
+      <li>Talisay City Modern Glass House</li>
+    </ul>
+
+    <h2 id="about">About Us</h2>
+    <p>
+      J B Rental House is a trusted home-rental service located in Cebu, Philippines.
+      We provide comfortable, affordable, and secure homes for individuals and families.  
+      Our mission is to help every renter find a safe, clean, and modern place to call home.  
+      We are committed to excellent customer service, easy booking, and reliable assistance for all our clients.
+    </p>
+
+    <h2>Report Information</h2>
+    <p>
+      If you notice any incorrect or suspicious rental listings, please report them immediately to ensure the safety and satisfaction of all users.
+    </p>
+
+    <div class="contact-info" id="contact">
+      <h2>Contact Us</h2>
+      <p>📞 09150042458</p>
+      <p>📧 <a href="mailto:houserent@gmail.com">houserent@gmail.com</a></p>
+      <p>📍 Cebu City, Philippines</p>
+    </div>
+  </div>
+
+  <!-- Logout button -->
+  <form method="GET" action="{{ url_for('logout') }}">
+    <button type="submit" class="logout-btn">Logout</button>
+  </form>
+
+  <!-- Next Page button (fixed) -->
+  <a href="{{ url_for('bulosan2') }}" class="next-page-btn">NEXT PAGE →</a>
+
+  <footer>
+    &copy; 2025 J B Rental House | All Rights Reserved
+  </footer>
+</body>
+</html>

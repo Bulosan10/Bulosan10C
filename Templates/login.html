@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - J B Rental House</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: url("{{ url_for('static', filename='house7.jpeg') }}") no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #fff;
+    }
+    .form-container {
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      padding: 40px;
+      border-radius: 16px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    }
+    h1 { margin-bottom: 20px; text-shadow: 0 2px 4px rgba(0,0,0,0.6); }
+    input {
+      width: 100%; padding: 10px; margin: 10px 0;
+      border: none; border-radius: 8px; outline: none;
+    }
+    .btn {
+      background: #3b82f6; color: white; padding: 10px;
+      border: none; border-radius: 8px; width: 100%;
+      cursor: pointer; font-weight: 600; transition: background 0.3s;
+    }
+    .btn:hover { background: #2563eb; }
+    .link {
+      margin-top: 15px; display: block;
+      color: #93c5fd; text-decoration: none; font-size: 14px;
+    }
+    .link:hover { text-decoration: underline; }
+    .message {
+      margin: 10px 0; font-size: 14px; font-weight: 600;
+      color: #ef4444;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h1>Login</h1>
+
+    {% if message %}
+      <div class="message">{{ message }}</div>
+    {% endif %}
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="message"
+            style="color:{% if category == 'success' %}#22c55e{% elif category == 'danger' %}#ef4444{% else %}#fff{% endif %}">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form action="{{ url_for('login') }}" method="POST">
+      <input type="text" name="username" placeholder="Username" required>
+      <input type="password" name="password" placeholder="Password" required>
+      <button class="btn" type="submit">Login</button>
+    </form>
+
+    <a class="link" href="{{ url_for('signup') }}">Don't have an account? Sign Up</a>
+  </div>
+</body>
+</html>

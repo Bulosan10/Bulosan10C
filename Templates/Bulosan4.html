@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luxury 4-Bedroom Villa - J B Rental House</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: url("{{ url_for('static', filename='house4.jpeg') }}") no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px;
+      text-align: center;
+    }
+
+    header {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(6px);
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      text-align: center;
+    }
+
+    header a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      margin: 0 20px;
+    }
+
+    header a:hover {
+      color: #93c5fd;
+    }
+
+    .house-details {
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(6px);
+      border-radius: 16px;
+      padding: 30px;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      margin-top: 50px;
+    }
+
+    .house-details img {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      height: 300px;
+      object-fit: cover;
+    }
+
+    h2 {
+      color: #60a5fa;
+      margin-bottom: 15px;
+    }
+
+    p {
+      margin-bottom: 10px;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .description {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 10px;
+      color: #e5e7eb;
+      font-size: 15px;
+      text-align: left;
+    }
+
+    .rent-btn {
+      display: inline-block;
+      background-color: #2563eb;
+      color: #fff;
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      margin-top: 15px;
+      transition: background 0.3s;
+      cursor: pointer;
+    }
+
+    .rent-btn:hover {
+      background-color: #1e40af;
+    }
+
+    .rent-form {
+      display: none;
+      background: rgba(255, 255, 255, 0.95);
+      color: #111;
+      border-radius: 16px;
+      padding: 25px;
+      margin-top: 20px;
+      text-align: left;
+    }
+
+    .rent-form h3 {
+      text-align: center;
+      margin-bottom: 15px;
+      color: #2563eb;
+    }
+
+    .rent-form label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: 600;
+    }
+
+    .rent-form input, .rent-form textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    .rent-form button {
+      width: 100%;
+      background-color: #2563eb;
+      color: #fff;
+      font-weight: 600;
+      border: none;
+      padding: 12px;
+      border-radius: 10px;
+      margin-top: 15px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .rent-form button:hover {
+      background-color: #1e40af;
+    }
+
+    .proof {
+      display: none;
+      background: rgba(255, 255, 255, 0.95);
+      color: #111;
+      border-radius: 16px;
+      padding: 25px;
+      margin-top: 20px;
+      text-align: left;
+    }
+
+    .proof h3 {
+      text-align: center;
+      color: #16a34a;
+      margin-bottom: 10px;
+    }
+
+    .proof p {
+      color: #222;
+      margin: 5px 0;
+    }
+
+    .proof strong {
+      color: #111;
+    }
+
+    footer {
+      background: rgba(0, 0, 0, 0.6);
+      color: #cbd5e1;
+      text-align: center;
+      padding: 15px;
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="{{ url_for('bulosan2') }}">🏠 Back to Houses</a>
+  </header>
+
+  <div class="house-details">
+    <img src="{{ url_for('static', filename='house4.jpeg') }}" alt="Luxury 4-Bedroom Villa">
+    <h2>🏡 Luxury 4-Bedroom Villa with Private Pool</h2>
+    <p>💰 ₱35,000 / month</p>
+    <p>📍 Maria Luisa, Cebu City</p>
+    <p>📞 Contact: 09150042458</p>
+
+    <div class="description">
+      Live in style and comfort in this stunning 4-bedroom villa featuring modern European-inspired design and spacious interiors. 
+      It includes a grand living area, elegant dining space, and a fully equipped kitchen — perfect for family gatherings. <br><br>
+      Step outside to enjoy your private swimming pool, landscaped garden, and relaxing outdoor lounge — ideal for hosting or simply unwinding after a long day. <br><br>
+      ✅ 4 Bedrooms <br>
+      ✅ 3 Bathrooms <br>
+      ✅ Private Swimming Pool <br>
+      ✅ Fully Furnished Kitchen <br>
+      ✅ Spacious Balcony & Garage <br>
+      ✅ Secure Gated Community
+    </div>
+
+    <button class="rent-btn" onclick="showForm()">Rent Now</button>
+
+    <div class="rent-form" id="rentForm">
+      <h3>📝 Rental Application Form</h3>
+      <form onsubmit="submitForm(event)">
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" placeholder="Enter your full name" required>
+
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" placeholder="Enter your email" required>
+
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" placeholder="Enter your phone number" required>
+
+        <label for="movein">Preferred Move-in Date:</label>
+        <input type="date" id="movein" required>
+
+        <label for="message">Message (optional):</label>
+        <textarea id="message" rows="3" placeholder="Any specific request or question?"></textarea>
+
+        <button type="submit">Submit Application</button>
+      </form>
+    </div>
+
+    <div class="proof" id="proofMessage">
+      <h3>✅ Rental Confirmation</h3>
+      <p>Here’s your proof that you’ve successfully rented the house.</p>
+      <p>📸 <strong>Make sure to screenshot this and show it to the owner upon arrival!</strong></p>
+      <hr style="margin:10px 0;">
+      <p><strong>Name:</strong> <span id="proofName"></span></p>
+      <p><strong>Email:</strong> <span id="proofEmail"></span></p>
+      <p><strong>Phone:</strong> <span id="proofPhone"></span></p>
+      <p><strong>Move-in Date:</strong> <span id="proofMovein"></span></p>
+      <p><strong>House Rented:</strong> 🏡 Luxury 4-Bedroom Villa with Private Pool — ₱35,000/month</p>
+      <p><strong>Location:</strong> Maria Luisa, Cebu City</p>
+      <p><strong>Contact Owner:</strong> 09150042458</p>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 J B Rental House | Cebu, Philippines
+  </footer>
+
+  <script>
+    function showForm() {
+      document.getElementById('rentForm').style.display = 'block';
+      document.getElementById('proofMessage').style.display = 'none';
+    }
+
+    function submitForm(event) {
+      event.preventDefault();
+
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const movein = document.getElementById('movein').value;
+
+      document.getElementById('rentForm').style.display = 'none';
+      document.getElementById('proofMessage').style.display = 'block';
+
+      document.getElementById('proofName').textContent = name;
+      document.getElementById('proofEmail').textContent = email;
+      document.getElementById('proofPhone').textContent = phone;
+      document.getElementById('proofMovein').textContent = movein;
+
+      window.scrollTo({ top: document.getElementById('proofMessage').offsetTop, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minglanilla House - J B Rental House</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: url("{{ url_for('static', filename='house2.jpeg') }}") no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px;
+      text-align: center;
+    }
+
+    header {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(6px);
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      text-align: center;
+    }
+
+    header a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      margin: 0 20px;
+    }
+
+    header a:hover { color: #93c5fd; }
+
+    .house-details {
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(6px);
+      border-radius: 16px;
+      padding: 30px;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      margin-top: 50px;
+    }
+
+    .house-details img {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      height: 300px;
+      object-fit: cover;
+    }
+
+    h2 { color: #60a5fa; margin-bottom: 15px; }
+
+    p { margin-bottom: 10px; font-size: 16px; line-height: 1.5; }
+
+    .description {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 10px;
+      color: #e5e7eb;
+      font-size: 15px;
+      text-align: left;
+    }
+
+    .rent-btn {
+      display: inline-block;
+      background-color: #2563eb;
+      color: #fff;
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      margin-top: 15px;
+      transition: background 0.3s;
+      cursor: pointer;
+    }
+    .rent-btn:hover { background-color: #1e40af; }
+
+    .rent-form, .proof {
+      display: none;
+      background: rgba(255, 255, 255, 0.95);
+      color: #111;
+      border-radius: 16px;
+      padding: 25px;
+      margin-top: 20px;
+      text-align: left;
+    }
+
+    .rent-form h3, .proof h3 {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .rent-form h3 { color: #2563eb; }
+    .proof h3 { color: #16a34a; }
+
+    label { display: block; margin: 10px 0 5px; font-weight: 600; }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    button {
+      width: 100%;
+      background-color: #2563eb;
+      color: #fff;
+      font-weight: 600;
+      border: none;
+      padding: 12px;
+      border-radius: 10px;
+      margin-top: 15px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover { background-color: #1e40af; }
+
+    footer {
+      background: rgba(0, 0, 0, 0.6);
+      color: #cbd5e1;
+      text-align: center;
+      padding: 15px;
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="{{ url_for('bulosan2') }}">🏠 Back to Houses</a>
+  </header>
+
+  <div class="house-details">
+    <img src="{{ url_for('static', filename='house2.jpeg') }}" alt="Minglanilla House">
+    <h2>🏡 Minglanilla 2-Bedroom Home</h2>
+    <p>💰 ₱15,000 / month</p>
+    <p>📍 Tunghaan, Minglanilla</p>
+    <p>📞 Contact: 09150042458</p>
+
+    <div class="description">
+      This cozy 2-bedroom house in Minglanilla offers comfort, safety, and convenience.
+      Located in a peaceful neighborhood with nearby schools, markets, and easy transportation access — perfect for small families or professionals.
+      <br><br>
+      ✅ 2 Bedrooms <br>
+      ✅ 1 Bathroom <br>
+      ✅ Small Front Yard <br>
+      ✅ Fully Furnished <br>
+      ✅ 24/7 Security
+    </div>
+
+    <button class="rent-btn" onclick="showForm()">Rent Now</button>
+
+    <!-- RENT FORM -->
+    <form class="rent-form" id="rentForm" action="{{ url_for('rent_house', house_id=2) }}" method="POST" onsubmit="submitForm(event)">
+      <h3>📝 Rental Application Form</h3>
+
+      <label>Full Name:</label>
+      <input type="text" name="name" id="name" required placeholder="Your full name">
+
+      <label>Email Address:</label>
+      <input type="email" name="email" id="email" required placeholder="your@email.com">
+
+      <label>Phone Number:</label>
+      <input type="text" name="phone" id="phone" required placeholder="09XXXXXXXXX">
+
+      <label>Move-in Date:</label>
+      <input type="date" name="movein" id="movein" required>
+
+      <label>Message (optional):</label>
+      <textarea name="message" id="message" rows="3" placeholder="Any notes or requests..."></textarea>
+
+      <button type="submit">Confirm Rent</button>
+    </form>
+
+    <!-- PROOF SECTION -->
+    <div class="proof" id="proofMessage">
+      <h3>✅ Rental Confirmation</h3>
+      <p>Here’s your proof that you’ve successfully rented the house.</p>
+      <p>📸 <strong>Take a screenshot of this confirmation.</strong></p>
+      <hr style="margin:10px 0;">
+      <p><strong>Name:</strong> <span id="proofName"></span></p>
+      <p><strong>Email:</strong> <span id="proofEmail"></span></p>
+      <p><strong>Phone:</strong> <span id="proofPhone"></span></p>
+      <p><strong>Move-in Date:</strong> <span id="proofMovein"></span></p>
+      <p><strong>House:</strong> 🏡 Minglanilla 2-Bedroom Home — ₱15,000/month</p>
+      <p><strong>Location:</strong> Tunghaan, Minglanilla</p>
+      <p><strong>Contact Owner:</strong> 09150042458</p>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 J B Rental House | Cebu, Philippines
+  </footer>
+
+  <script>
+    function showForm() {
+      document.getElementById('rentForm').style.display = 'block';
+      document.getElementById('proofMessage').style.display = 'none';
+    }
+
+    function submitForm(event) {
+      event.preventDefault();
+
+      // Collect data
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const movein = document.getElementById('movein').value;
+
+      // Send to Flask
+      fetch("{{ url_for('rent_house', house_id=2) }}", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          name, email, phone, movein,
+          message: document.getElementById('message').value
+        })
+      }).then(() => {
+        // Show proof
+        document.getElementById('rentForm').style.display = 'none';
+        document.getElementById('proofMessage').style.display = 'block';
+        document.getElementById('proofName').textContent = name;
+        document.getElementById('proofEmail').textContent = email;
+        document.getElementById('proofPhone').textContent = phone;
+        document.getElementById('proofMovein').textContent = movein;
+      });
+    }
+  </script>
+</body>
+</html>

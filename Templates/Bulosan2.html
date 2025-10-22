@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Available Houses - J B Rental House</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: url("{{ url_for('static', filename='house3.jpeg') }}") no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+      min-height: 100vh;
+      padding-bottom: 80px;
+    }
+
+    header {
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(6px);
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      text-align: center;
+      z-index: 1000;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+    }
+
+    nav a, nav form button {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+
+    nav a:hover, nav form button:hover {
+      color: #93c5fd;
+    }
+
+    h1 {
+      text-align: center;
+      margin: 30px 0;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.6);
+      color: #fff;
+      font-size: 28px;
+    }
+
+    .houses {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 25px;
+      padding: 40px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.9);
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      color: #222;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 15px 25px rgba(0,0,0,0.4);
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      height: 180px;
+      object-fit: cover;
+      cursor: pointer;
+    }
+
+    .card h2 {
+      margin-bottom: 10px;
+      color: #2563eb;
+    }
+
+    .card p {
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+
+    .rent-btn {
+      display: inline-block;
+      background-color: #2563eb;
+      color: #fff;
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .rent-btn:hover {
+      background-color: #1e40af;
+    }
+
+    footer {
+      background: rgba(0,0,0,0.6);
+      padding: 15px;
+      text-align: center;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      color: #cbd5e1;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="{{ url_for('bulosan') }}">Home</a>
+      <form method="GET" action="{{ url_for('logout') }}" style="display:inline;">
+        <button type="submit">Logout</button>
+      </form>
+    </nav>
+  </header>
+
+  <h1>🏠 Available Houses for Rent</h1>
+
+  <div class="houses">
+    <!-- House 5 -->
+    <div class="card">
+      <a href="{{ url_for('bulosan3', house_id=5) }}">
+        <img src="{{ url_for('static', filename='house2.jpeg') }}" alt="2-bedroom modern house">
+      </a>
+      <h2>🏡 Modern 2-Bedroom House</h2>
+      <p>💰 ₱15,000 / month</p>
+      <p>📍 Tunghaan, Minglanilla</p>
+      <p>📞 Contact: 09150042458</p>
+      <p>✨ A cozy modern home perfect for small families or couples.</p>
+      <a href="{{ url_for('bulosan3', house_id=5) }}" class="rent-btn">Rent Now</a>
+    </div>
+
+    <!-- House 6 -->
+    <div class="card">
+      <a href="{{ url_for('bulosan4', house_id=6) }}">
+        <img src="{{ url_for('static', filename='house4.jpeg') }}" alt="Luxury 4-Bedroom Villa">
+      </a>
+      <h2>🏡 Luxury 4-Bedroom Villa</h2>
+      <p>💰 ₱35,000 / month</p>
+      <p>📍 Maria Luisa, Cebu City</p>
+      <p>📞 Contact: 09150042458</p>
+      <p>🌇 Elegant villa with panoramic views and modern interiors.</p>
+      <a href="{{ url_for('bulosan4', house_id=6) }}" class="rent-btn">Rent Now</a>
+    </div>
+
+    <!-- House 7 -->
+    <div class="card">
+      <a href="{{ url_for('bulosan5', house_id=7) }}">
+        <img src="{{ url_for('static', filename='house6.jpeg') }}" alt="Luxury Modern Villa with Infinity Pool">
+      </a>
+      <h2>🏡 Luxury Modern Villa with Infinity Pool</h2>
+      <p>💰 ₱12,000 / month</p>
+      <p>📍 Guadalupe, Cebu City</p>
+      <p>📞 Contact: 09150042458</p>
+      <p>🏖️ Stunning villa with floor-to-ceiling glass walls and infinity pool.</p>
+      <a href="{{ url_for('bulosan5', house_id=7) }}" class="rent-btn">Rent Now</a>
+    </div>
+
+    <!-- House 8 -->
+    <div class="card">
+      <a href="{{ url_for('bulosan6', house_id=8) }}">
+        <img src="{{ url_for('static', filename='house5.jpeg') }}" alt="Modern 4-Bedroom Glass House">
+      </a>
+      <h2>🏡 Modern 4-Bedroom Glass House</h2>
+      <p>💰 ₱38,000 / month</p>
+      <p>📍 Talisay, Cebu City</p>
+      <p>📞 Contact: 09150042458</p>
+      <p>🌿 Elegant glass house blending modern design with nature.</p>
+      <a href="{{ url_for('bulosan6', house_id=8) }}" class="rent-btn">Rent Now</a>
+    </div>
+  </div>
+
+  <footer>
+    © 2025 J B Rental House. All rights reserved.
+  </footer>
+</body>
+</html>

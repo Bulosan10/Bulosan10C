@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Admin Dashboard</title>
+<style>
+  body { font-family: Arial; background: url('{{ url_for("static", filename="admin_bg.jpeg") }}') center/cover no-repeat; color: white; padding: 40px; }
+  table { width: 100%; border-collapse: collapse; background: rgba(0,0,0,0.6); }
+  th, td { border: 1px solid #ccc; padding: 10px; text-align: center; }
+  th { background: rgba(0,0,0,0.8); }
+</style>
+</head>
+<body>
+  <h1>Admin Dashboard</h1>
+  <a href="{{ url_for('logout') }}" style="color:white;">Logout</a>
+  <table>
+    <tr><th>House</th><th>Description</th><th>Status</th><th>Action</th></tr>
+    {% for h in houses %}
+    <tr>
+      <td>{{ h.name }}</td>
+      <td>{{ h.description }}</td>
+      <td>{{ h.status }}</td>
+      <td>
+        <form method="POST">
+          <input type="hidden" name="house_id" value="{{ h.id }}">
+          <select name="status">
+            <option value="For Rent" {% if h.status == "For Rent" %}selected{% endif %}>For Rent</option>
+            <option value="Rented" {% if h.status == "Rented" %}selected{% endif %}>Rented</option>
+          </select>
+          <button type="submit">Update</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+</body>
+</html>

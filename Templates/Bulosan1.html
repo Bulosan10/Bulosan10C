@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Available Houses - J B Rental House</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: url("{{ url_for('static', filename='house3.jpeg') }}") no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      min-height: 100vh;
+      padding-bottom: 80px; /* extra space for fixed button */
+    }
+
+    header {
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(6px);
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    nav a:hover { color: #93c5fd; }
+
+    h1 { text-align: center; margin: 30px 0; text-shadow: 0 2px 5px rgba(0, 0, 0, 0.6); color: #fff; }
+
+    .houses {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 25px;
+      padding: 40px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
+      color: #222;
+    }
+
+    .card:hover { transform: scale(1.05); }
+
+    .card img {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      height: 180px;
+      object-fit: cover;
+      cursor: pointer;
+    }
+
+    .card h2 { margin-bottom: 10px; color: #2563eb; }
+    .card p { margin-bottom: 8px; line-height: 1.5; }
+
+    .rent-btn {
+      display: inline-block;
+      background-color: #2563eb;
+      color: #fff;
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .rent-btn:hover { background-color: #1e40af; }
+
+    footer {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 15px;
+      text-align: center;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      color: #cbd5e1;
+    }
+
+    .prev-btn, .next-btn {
+      position: fixed;
+      bottom: 20px;
+      background-color: #2563eb;
+      color: #fff;
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.3s;
+      z-index: 1000;
+    }
+    .prev-btn:hover, .next-btn:hover { background-color: #1e40af; }
+    .prev-btn { left: 20px; }
+    .next-btn { right: 20px; }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="{{ url_for('bulosan') }}">Home</a>
+      <a href="{{ url_for('logout') }}">Logout</a>
+    </nav>
+  </header>
+
+  <h1>🏠 More Available Houses for Rent</h1>
+
+  <div class="houses">
+    {% for house in houses %}
+    <div class="card">
+      <a href="{{ url_for('bulosan1', house_id=house.id) }}">
+        <img src="{{ url_for('static', filename=house.image) }}" alt="{{ house.name }}">
+      </a>
+      <h2>{{ house.name }}</h2>
+      <p>💰 ₱{{ house.price }} / month</p>
+      <p>📍 {{ house.location }}</p>
+      <p>📞 Contact: 09150042458</p>
+      <p>{{ house.description }}</p>
+      <a href="{{ url_for('bulosan1', house_id=house.id) }}" class="rent-btn">Rent Now</a>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- Navigation Buttons -->
+  <a href="{{ url_for('bulosan') }}" class="prev-btn">← Previous Page</a>
+  <a href="{{ url_for('bulosan2') }}" class="next-btn">Next Page →</a>
+
+  <footer>
+    © 2025 J B Rental House. All rights reserved.
+  </footer>
+</body>
+</html>
