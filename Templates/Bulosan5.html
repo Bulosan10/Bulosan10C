@@ -19,7 +19,6 @@
       padding: 30px;
       text-align: center;
     }
-
     header {
       width: 100%;
       background: rgba(0, 0, 0, 0.6);
@@ -30,18 +29,8 @@
       z-index: 1000;
       text-align: center;
     }
-
-    header a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: 600;
-      margin: 0 20px;
-    }
-
-    header a:hover {
-      color: #93c5fd;
-    }
-
+    header a { color: #fff; text-decoration: none; font-weight: 600; margin: 0 20px; }
+    header a:hover { color: #93c5fd; }
     .house-details {
       background: rgba(0, 0, 0, 0.65);
       backdrop-filter: blur(6px);
@@ -52,26 +41,9 @@
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
       margin-top: 50px;
     }
-
-    .house-details img {
-      width: 100%;
-      border-radius: 12px;
-      margin-bottom: 20px;
-      height: 300px;
-      object-fit: cover;
-    }
-
-    h2 {
-      color: #60a5fa;
-      margin-bottom: 15px;
-    }
-
-    p {
-      margin-bottom: 10px;
-      font-size: 16px;
-      line-height: 1.5;
-    }
-
+    .house-details img { width: 100%; border-radius: 12px; margin-bottom: 20px; height: 300px; object-fit: cover; }
+    h2 { color: #60a5fa; margin-bottom: 15px; }
+    p { margin-bottom: 10px; font-size: 16px; line-height: 1.5; }
     .description {
       background: rgba(255, 255, 255, 0.1);
       padding: 15px;
@@ -80,25 +52,9 @@
       color: #e5e7eb;
       font-size: 15px;
     }
-
-    .rent-btn {
-      display: inline-block;
-      background-color: #2563eb;
-      color: #fff;
-      font-weight: 600;
-      padding: 10px 20px;
-      border-radius: 10px;
-      text-decoration: none;
-      margin-top: 15px;
-      transition: background 0.3s;
-      cursor: pointer;
-    }
-
-    .rent-btn:hover {
-      background-color: #1e40af;
-    }
-
-    .rent-form {
+    .rent-btn { display: inline-block; background-color: #2563eb; color: #fff; font-weight: 600; padding: 10px 20px; border-radius: 10px; text-decoration: none; margin-top: 15px; transition: background 0.3s; cursor: pointer; }
+    .rent-btn:hover { background-color: #1e40af; }
+    .rent-form, .proof {
       display: none;
       background: rgba(255, 255, 255, 0.95);
       color: #111;
@@ -107,69 +63,12 @@
       margin-top: 20px;
       text-align: left;
     }
-
-    .rent-form h3 {
-      text-align: center;
-      margin-bottom: 15px;
-      color: #2563eb;
-    }
-
-    .rent-form label {
-      display: block;
-      margin: 10px 0 5px;
-      font-weight: 600;
-    }
-
-    .rent-form input, .rent-form textarea {
-      width: 100%;
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 14px;
-    }
-
-    .rent-form button {
-      width: 100%;
-      background-color: #2563eb;
-      color: #fff;
-      font-weight: 600;
-      border: none;
-      padding: 12px;
-      border-radius: 10px;
-      margin-top: 15px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    .rent-form button:hover {
-      background-color: #1e40af;
-    }
-
-    .proof {
-      display: none;
-      background: rgba(255, 255, 255, 0.95);
-      color: #111;
-      border-radius: 16px;
-      padding: 25px;
-      margin-top: 20px;
-      text-align: left;
-    }
-
-    .proof h3 {
-      text-align: center;
-      color: #16a34a;
-      margin-bottom: 10px;
-    }
-
-    .proof p {
-      color: #222;
-      margin: 5px 0;
-    }
-
-    .proof strong {
-      color: #111;
-    }
-
+    .rent-form h3 { text-align: center; margin-bottom: 15px; color: #2563eb; }
+    .proof h3 { text-align: center; color: #16a34a; margin-bottom: 10px; }
+    label { display: block; margin: 10px 0 5px; font-weight: 600; }
+    input, textarea { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc; font-size: 14px; }
+    button { width: 100%; background-color: #2563eb; color: #fff; font-weight: 600; border: none; padding: 12px; border-radius: 10px; margin-top: 15px; cursor: pointer; transition: background 0.3s; }
+    button:hover { background-color: #1e40af; }
     footer {
       background: rgba(0, 0, 0, 0.6);
       color: #cbd5e1;
@@ -254,12 +153,20 @@
     }
 
     function submitForm(event) {
-      event.preventDefault();
+      event.preventDefault(); // Prevent page refresh
 
       const name = document.getElementById('name').value;
       const email = document.getElementById('email').value;
       const phone = document.getElementById('phone').value;
       const movein = document.getElementById('movein').value;
+      const message = document.getElementById('message').value;
+
+      // Optional: send data to Flask
+      fetch("{{ url_for('rent_house', house_id=5) }}", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({ name, email, phone, movein, message })
+      });
 
       document.getElementById('rentForm').style.display = 'none';
       document.getElementById('proofMessage').style.display = 'block';

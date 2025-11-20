@@ -61,16 +61,8 @@
       object-fit: cover;
     }
 
-    h2 {
-      color: #60a5fa;
-      margin-bottom: 15px;
-    }
-
-    p {
-      margin-bottom: 10px;
-      font-size: 16px;
-      line-height: 1.5;
-    }
+    h2 { color: #60a5fa; margin-bottom: 15px; }
+    p { margin-bottom: 10px; font-size: 16px; line-height: 1.5; }
 
     .description {
       background: rgba(255, 255, 255, 0.1);
@@ -94,12 +86,9 @@
       transition: background 0.3s;
       cursor: pointer;
     }
+    .rent-btn:hover { background-color: #1e40af; }
 
-    .rent-btn:hover {
-      background-color: #1e40af;
-    }
-
-    .rent-form {
+    .rent-form, .proof {
       display: none;
       background: rgba(255, 255, 255, 0.95);
       color: #111;
@@ -109,19 +98,11 @@
       text-align: left;
     }
 
-    .rent-form h3 {
-      text-align: center;
-      margin-bottom: 15px;
-      color: #2563eb;
-    }
+    .rent-form h3 { text-align: center; margin-bottom: 15px; color: #2563eb; }
+    .proof h3 { text-align: center; color: #16a34a; margin-bottom: 10px; }
 
-    .rent-form label {
-      display: block;
-      margin: 10px 0 5px;
-      font-weight: 600;
-    }
-
-    .rent-form input, .rent-form textarea {
+    label { display: block; margin: 10px 0 5px; font-weight: 600; }
+    input, textarea {
       width: 100%;
       padding: 10px;
       border-radius: 8px;
@@ -129,7 +110,7 @@
       font-size: 14px;
     }
 
-    .rent-form button {
+    button {
       width: 100%;
       background-color: #2563eb;
       color: #fff;
@@ -141,35 +122,7 @@
       cursor: pointer;
       transition: background 0.3s;
     }
-
-    .rent-form button:hover {
-      background-color: #1e40af;
-    }
-
-    .proof {
-      display: none;
-      background: rgba(255, 255, 255, 0.95);
-      color: #111;
-      border-radius: 16px;
-      padding: 25px;
-      margin-top: 20px;
-      text-align: left;
-    }
-
-    .proof h3 {
-      text-align: center;
-      color: #16a34a;
-      margin-bottom: 10px;
-    }
-
-    .proof p {
-      color: #222;
-      margin: 5px 0;
-    }
-
-    .proof strong {
-      color: #111;
-    }
+    button:hover { background-color: #1e40af; }
 
     footer {
       background: rgba(0, 0, 0, 0.6);
@@ -208,28 +161,28 @@
 
     <button class="rent-btn" onclick="showForm()">Rent Now</button>
 
-    <div class="rent-form" id="rentForm">
+    <!-- RENT FORM -->
+    <form class="rent-form" id="rentForm" onsubmit="submitForm(event)">
       <h3>📝 Rental Application Form</h3>
-      <form onsubmit="submitForm(event)">
-        <label for="name">Full Name:</label>
-        <input type="text" id="name" placeholder="Enter your full name" required>
+      <label for="name">Full Name:</label>
+      <input type="text" name="name" id="name" placeholder="Enter your full name" required>
 
-        <label for="email">Email Address:</label>
-        <input type="email" id="email" placeholder="Enter your email" required>
+      <label for="email">Email Address:</label>
+      <input type="email" name="email" id="email" placeholder="Enter your email" required>
 
-        <label for="phone">Phone Number:</label>
-        <input type="tel" id="phone" placeholder="Enter your phone number" required>
+      <label for="phone">Phone Number:</label>
+      <input type="tel" name="phone" id="phone" placeholder="Enter your phone number" required>
 
-        <label for="movein">Preferred Move-in Date:</label>
-        <input type="date" id="movein" required>
+      <label for="movein">Preferred Move-in Date:</label>
+      <input type="date" name="movein" id="movein" required>
 
-        <label for="message">Message (optional):</label>
-        <textarea id="message" rows="3" placeholder="Any specific request or question?"></textarea>
+      <label for="message">Message (optional):</label>
+      <textarea name="message" id="message" rows="3" placeholder="Any specific request or question?"></textarea>
 
-        <button type="submit">Submit Application</button>
-      </form>
-    </div>
+      <button type="submit">Submit Application</button>
+    </form>
 
+    <!-- PROOF SECTION -->
     <div class="proof" id="proofMessage">
       <h3>✅ Rental Confirmation</h3>
       <p>Here’s your proof that you’ve successfully rented the house.</p>
@@ -256,21 +209,32 @@
     }
 
     function submitForm(event) {
-      event.preventDefault();
+      event.preventDefault(); // Prevent page from exiting
 
       const name = document.getElementById('name').value;
       const email = document.getElementById('email').value;
       const phone = document.getElementById('phone').value;
       const movein = document.getElementById('movein').value;
+      const message = document.getElementById('message').value;
 
+      // Optional: send data to Flask backend
+      fetch("{{ url_for('rent_house', house_id=4) }}", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({ name, email, phone, movein, message })
+      });
+
+      // Hide form and show proof
       document.getElementById('rentForm').style.display = 'none';
       document.getElementById('proofMessage').style.display = 'block';
 
+      // Fill proof section
       document.getElementById('proofName').textContent = name;
       document.getElementById('proofEmail').textContent = email;
       document.getElementById('proofPhone').textContent = phone;
       document.getElementById('proofMovein').textContent = movein;
 
+      // Scroll to proof
       window.scrollTo({ top: document.getElementById('proofMessage').offsetTop, behavior: 'smooth' });
     }
   </script>
